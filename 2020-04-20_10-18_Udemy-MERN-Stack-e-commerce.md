@@ -4,11 +4,16 @@ Ref: https://www.udemy.com/course/react-node-ecommerce/learn/lecture/14932768#ov
 
 ---
 
-npm i express dotenv nodemon
+## Middleware
 
+Express is actually a very small package. However, it's real power comes from using Middleware to extend it.
 
-nodemon - to continuously run our server
+when using middleware you will use the
 
-dotenv - to manage environments
-(npm description: Dotenv is a zero-dependency module that loads environment variables from a .env file into process.env. Storing configuration in the environment separate from code is based on The Twelve-Factor App methodology.)
+```
+next();
+```
 
+method to move onto the next piece of middleware in the chain.
+
+---
