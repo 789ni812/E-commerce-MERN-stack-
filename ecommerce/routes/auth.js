@@ -13,9 +13,4 @@ router.post("/signup", userSignupValidator, signup);
 router.post("/signin", signin);
 router.get("/signout", signout);
 
-// Debug: allows you to test requiresSignin or if removed then displays message
-// router.get("/hello", requireSignin, (req, res) => {
-//   res.send("hello there");
-// });
-
 module.exports = router;
