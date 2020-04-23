@@ -21,7 +21,6 @@ router.put(
   isAdmin,
   update
 );
-
 router.delete(
   "/category/:categoryId/:userId",
   requireSignin,
@@ -29,7 +28,6 @@ router.delete(
   isAdmin,
   remove
 );
-
 router.get("/categories", list);
 
 router.param("categoryId", categoryById);
