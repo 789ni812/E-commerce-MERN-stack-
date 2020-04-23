@@ -113,7 +113,7 @@ exports.update = (req, res) => {
     }
 
     let product = req.product;
-    product = _.extend(product, fields); // _.extend() is supplied by lodash
+    product = _.extend(product, fields);
 
     // 1kb = 1000
     // 1mb = 1000000
@@ -141,11 +141,10 @@ exports.update = (req, res) => {
 };
 
 /**
- * Sell / arrival
- *
- * by sell = /products?sortby=sold&order=desc&limit=4
- * by arrival = /products?sortby=createdAt&order=desc&limit=4
- * if no prarams are sent, than all products are returned
+ * sell / arrival
+ * by sell = /products?sortBy=sold&order=desc&limit=4
+ * by arrival = /products?sortBy=createdAt&order=desc&limit=4
+ * if no params are sent, then all products are returned
  */
 
 exports.list = (req, res) => {
@@ -161,9 +160,30 @@ exports.list = (req, res) => {
     .exec((err, products) => {
       if (err) {
         return res.status(400).json({
-          message: "Products not found"
+          error: "Products not found"
         });
       }
-      res.send(products);
+      res.json(products);
+    });
+};
+
+/**
+ * it will find the products based on the req product category
+ * other products that has the same category, will be returned
+ */
+
+exports.listRelated = (req, res) => {
+  let limit = req.query.limit ? parseInt(req.query.limit) : 6;
+
+  Product.find({ _id: { $ne: req.product }, category: req.product.category })
+    .limit(limit)
+    .populate("category", "_id name")
+    .exec((err, products) => {
+      if (err) {
+        return res.status(400).json({
+          error: "Products not found"
+        });
+      }
+      res.json(products);
     });
 };
