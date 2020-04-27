@@ -1,20 +1,21 @@
 import React from "react";
-import Menu from "../core/Menu";
+import Menu from "./Menu";
+import "../styles.css";
 
 const Layout = ({
-  title = "defaultTitle",
-  description = "defaultDescription",
-  className,
-  children
+    title = "Title",
+    description = "Description",
+    className,
+    children
 }) => (
-  <div>
-    <Menu />
-    <div className="jumbotron">
-      <h2>{title}</h2>
-      <p className="lead">{description}</p>
+    <div>
+        <Menu />
+        <div className="jumbotron">
+            <h2>{title}</h2>
+            <p className="lead">{description}</p>
+        </div>
+        <div className={className}>{children}</div>
     </div>
-    <div className={className}>{children}</div>
-  </div>
 );
 
 export default Layout;
